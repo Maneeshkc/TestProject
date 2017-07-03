@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="test">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body ng-controller="testController">
+    <Div ng-hide="isVisible"> {{error}}</Div>
+    <form name="searchuser" ng-submit="filteruser()">
+        <input type="text" ng-model="userName" required placeholder="enter the value here...." />
+        <input type="submit" value="filter" />
+    </form>
+    <input type="submit" value="clear" ng-click="clear()" />
+    <div class="table-responsive" ng-show="isVisible" ng-cloak="">
+        <table class="table">
+            <thead>
+                <tr>
+                    <Th>#</Th>
+                    <Th>Name</Th>
+                    <Th>Image</Th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tr ng-if="posts.id">
+                <Td>{{posts.id}}</Td>
+                <Td>{{posts.login}}</Td>
+                <Td><img ng-src="{{posts.avatar_url}}" style="width:50px;height: 60px" /></Td>
+                <td><a href="#" data-toggle="modal" ng-click="details(posts.login)" data-target="#myModal">view</a></td>
+
+            </tr>
+            <tr ng-repeat="val in posts " ng-hide="posts.id">
+                <Td>{{val.id}}</Td>
+                <Td>{{val.login }}</Td>
+                <Td><img ng-src="{{val.avatar_url}}" style="width:50px;height: 60px" /></Td>
+                <td><a href="#" data-toggle="modal" ng-click="details(val.login)" data-target="#myModal">view</a></td>
+
+            </tr>
+
+        </table>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="modal-body">
+                        <b><p>{{postsDetails.id}}</p></b>
+                    </div>
+                </div>
+
+                <DIV>Name::{{postsDetails.name}}</DIV>
+                <div><img ng-src="{{postsDetails.avatar_url}}" style="width:50px;height: 60px" /></div>
+                <DIV>Location::{{postsDetails.location}}</DIV>
+                <DIV>Number of followers{{postsDetails.followers}}</DIV>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
